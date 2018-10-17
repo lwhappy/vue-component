@@ -1,5 +1,7 @@
 require("../css/common.css");
 import index from '../../components/index.vue'
+
+
 var routes=[  
     { path: '/',  // 默认进入路由
       redirect: '/index'   //重定向

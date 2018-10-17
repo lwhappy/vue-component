@@ -1,4 +1,5 @@
 //const HtmlWebpackPlugin = require('html-webpack-plugin');
+var webpack = require('webpack')
 module.exports = {
   entry: {
             //global : __dirname + "/js/src/global.js",
@@ -9,7 +10,14 @@ module.exports = {
     filename: "[name].js",//打包后输出文件的文件名
 	//publicPath: __dirname + "/"
   },
- 
+  plugins: [
+	new webpack.ProvidePlugin({
+	$: "jquery",
+	jQuery: "jquery",
+	jquery: "jquery",
+	"window.jQuery": "jquery"
+ })
+],
   module: {
           rules: [
               /*{
@@ -36,7 +44,11 @@ module.exports = {
                           loader: "vue-loader"
                       }
                   ]
-              }
+              },
+			  {
+				test: /\.(jpg|png|gif)/,
+				use: "url-loader?limit=8000"
+			  }
           ]
       } 
   

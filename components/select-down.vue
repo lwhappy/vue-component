@@ -91,7 +91,9 @@ export default {
         } 
   },
   created:function(){
+
       var that = this;
+      that._addOutClickListener();
       for(var i=0,len=that.selectData.list.length;i<len;i++){
         if(i === that.selectData.selectIndex){
           that.currentItem = that.selectData.list[i];
@@ -99,8 +101,25 @@ export default {
       }
     
   },
+
   methods: {
-    showList : function(){
+    _addOutClickListener() {
+         var that = this;
+         that._runOnWindowClick = function(evt) {
+           that._close();
+         };
+
+         window.addEventListener('click', that._runOnWindowClick);
+    },
+    _close() {
+         var that = this;
+         this.isShow = false;
+         //this._inputEl = this.$el.querySelector('input');
+    },
+    showList : function(event){
+      console.log(event)
+      event.stopPropagation();
+      event.preventDefault();
       var that = this;
       that.isShow = !that.isShow;
     },

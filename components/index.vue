@@ -9,10 +9,25 @@
     </warm>
     <confirm v-if="isShowConfirm" v-on:confirm="dialog.confirm" v-on:cancel="dialog.cancel" :type="confirmObj.type" :title="confirmObj.title"  :content="confirmObj.content">
     </confirm>
-    <div id="select-down" class="box-start">
-      <p style="margin-right:10px">下拉框：</p>
-      <selectDown v-on:change="selectChange" :selectData="selectData"></selectDown>
-      <div style="margin-left:10px">emit触发所得值：<span>{{selectItem.name}}</span></div>
+    <div id="select-down" class="m10">
+      <p>下拉框：</p>
+      <div class="box-start m10">
+          <selectDown v-on:change="selectChange" :selectData="selectData"></selectDown>
+          <div style="margin-left:10px">emit触发所得值：<span>{{selectItem.name}}</span></div>
+      </div>
+    </div>
+    <div id="radio" class="m10">
+      <p>单选框：</p>
+      <div class="box-start m10">
+          <radio v-on:change="radioChange" :radioData="radioData"></radio>
+          <div style="margin-left:20px">emit触发所得值：<span>{{radioSelectItem.name}}</span></div>
+      </div>
+    </div>
+    <div  class="m10">
+      <p>lightbox：</p>
+      <div class="box-start m10">
+          <lightbox  :imgList="imgList"></lightbox>
+      </div>
     </div>
     
   </div>
@@ -25,9 +40,11 @@
 import warm from './warm.vue';
 import confirm from './confirm.vue';
 import selectDown from './select-down.vue';
+import radio from './radio.vue';
+import lightbox from './lightbox.vue';
 export default {
     components: {
-      warm,confirm,selectDown
+      warm,confirm,selectDown,radio,lightbox
     },
     data:function() { 
           return {
@@ -62,12 +79,35 @@ export default {
             },
             selectItem : {},
             /**select end***/
+            /**radio begin**/
+            radioData : {
+               selectIndex : 1,//list数组的索引 
+               list : [
+                  {
+                    value : "1",name : "选项1"
+                  },
+                  {
+                    value : "2",name : "选项2"
+                  },
+                  {
+                    value : "3",name : "选项3"
+                  },
+               ]
+            },
+            radioSelectItem : {},
+            /**radio end***/
+            /**lightbox begin**/
+            imgList : [
+              {originalUrl : "images/image-3.jpg",thumbUrl : "images/thumb-3.jpg"},
+              {originalUrl : "images/image-4.jpg",thumbUrl : "images/thumb-4.jpg"},
+            ],
+            /**lightbox end***/
            
           }
     }, 
     created:function(){
       var that=this;
-      
+      console.log($("body").html())
         
     },
    
@@ -128,7 +168,12 @@ export default {
         selectChange : function(selectItem){
           var that = this;
           that.selectItem = selectItem;
-        }
+        },
+        /**select end**/
+        radioChange : function(selectItem){
+          var that = this;
+          that.radioSelectItem = selectItem;
+        },
     } 
     
   } 
@@ -147,7 +192,9 @@ html,body{
  input:focus{
     outline:none;
  }
- 
+ .m10{
+  margin:10px;
+ }
  .btns{
   padding:10px 0;
   position:fixed;
@@ -167,9 +214,7 @@ html,body{
     border-radius:6px;
     font-size:18px;
  }
- #select-down{
-  margin-left:50px;
- }
+
 
  
   /*******************************************************************************************/

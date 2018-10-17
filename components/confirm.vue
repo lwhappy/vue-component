@@ -16,12 +16,23 @@
     </div>
 </template> 
 <style>
+
+textarea{
+  width:90%;
+  padding:5px;
+  border: 1px solid #e5e5e5;
+  
+}
+textarea:focus{
+  outline:none;
+}
 .confirm-container{
   position:fixed;
   left:0;
   top:0;
   width:100%;
   height:100%;
+  z-index:10;
 }
 .confirm-container .mask{
   position:absolute;
