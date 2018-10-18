@@ -29,7 +29,19 @@
           <lightbox  :imgList="imgList"></lightbox>
       </div>
     </div>
-    
+    <div  class="m10">
+      <p>switch：</p>
+      <div class="box-start m10">
+          <mySwitch v-on:change="switchChange" :switchData = "switchData"></mySwitch>
+           <div style="margin-left:20px">emit触发所得值：<span>{{switchData.open}}</span></div>
+      </div>
+    </div>
+    <div  class="m10">
+      <p>slide：</p>
+      <div class="box-start m10">
+          <slide >请向左滑动</slide>
+      </div>
+    </div>
   </div>
 
 </template>
@@ -42,9 +54,11 @@ import confirm from './confirm.vue';
 import selectDown from './select-down.vue';
 import radio from './radio.vue';
 import lightbox from './lightbox.vue';
+import mySwitch from './switch.vue';
+import slide from './slide.vue';
 export default {
     components: {
-      warm,confirm,selectDown,radio,lightbox
+      warm,confirm,selectDown,radio,lightbox,mySwitch,slide
     },
     data:function() { 
           return {
@@ -102,7 +116,11 @@ export default {
               {originalUrl : "images/image-4.jpg",thumbUrl : "images/thumb-4.jpg"},
             ],
             /**lightbox end***/
-           
+           /***switch begin***/
+           switchData : {
+              open : true,
+           }
+           /***switch end***/
           }
     }, 
     created:function(){
@@ -170,10 +188,16 @@ export default {
           that.selectItem = selectItem;
         },
         /**select end**/
+        /**radio begin**/
         radioChange : function(selectItem){
           var that = this;
           that.radioSelectItem = selectItem;
         },
+        /***radio end**/
+        switchChange : function(data){
+          var that = this;
+          that.switchData = data;
+        }
     } 
     
   } 

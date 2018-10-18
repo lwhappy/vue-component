@@ -45,10 +45,17 @@ module.exports = {
                       }
                   ]
               },
-			  {
-				test: /\.(jpg|png|gif)/,
-				use: "url-loader?limit=8000"
-			  }
+			       {
+				      test: /\.(jpg|png|gif)/,
+				      use: "url-loader?limit=8000"
+			       },
+             {
+
+             test: /\.less$/,
+
+             loader: "style-loader!css-loader!less-loader",
+
+             },
           ]
       } 
   
